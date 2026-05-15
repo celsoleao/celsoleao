@@ -59,8 +59,8 @@ export default function About() {
             </h2>
             <p className="text-slate-400 text-lg leading-relaxed">{personal.summary}</p>
             <p className="text-slate-400 leading-relaxed">
-              Currently at{' '}
-              <span className="text-white font-semibold">UKG (Ultimate Kronos Group)</span>, I build
+              Last position at{' '}
+              <span className="text-white font-semibold">UKG (Ultimate Kronos Group)</span>, build
               HR software used by <span className="text-violet-400">Microsoft, Google, and Tesla</span>,
               while pioneering AI-assisted engineering workflows — from MCP integrations to autonomous
               agentic pipelines.
