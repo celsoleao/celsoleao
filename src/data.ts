@@ -64,7 +64,7 @@ export const experience = [
     company: 'UKG (Ultimate Kronos Group)',
     role: 'Senior Software Engineer',
     location: 'Pembroke Pines, FL, USA',
-    period: 'March 2022 – Present',
+    period: 'March 2022 – April 2026',
     current: true,
     description:
       'Develop and maintain enterprise HR software used by Microsoft, Google, and Tesla — serving millions of users globally.',
