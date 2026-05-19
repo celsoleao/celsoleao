@@ -65,7 +65,7 @@ export const experience = [
     role: 'Senior Software Engineer',
     location: 'Pembroke Pines, FL, USA',
     period: 'March 2022 – April 2026',
-    current: true,
+    current: false,
     description:
       'Develop and maintain enterprise HR software used by Microsoft, Google, and Tesla — serving millions of users globally.',
     bullets: [
