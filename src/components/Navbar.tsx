@@ -1,24 +1,44 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion'
+import { sections as navLinks } from '../data'
 
-const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'AI & MCP', href: '#ai' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Education', href: '#education' },
-  { label: 'Contact', href: '#contact' },
-]
+const modKey = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.userAgent) ? '⌘' : 'Ctrl'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [active, setActive] = useState('')
+  const { scrollYProgress } = useScroll()
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 25, restDelta: 0.001 })
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
+  }, [])
+
+  // Highlight the section currently in the middle of the viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(`#${e.target.id}`)
+        })
+      },
+      { rootMargin: '-45% 0px -50% 0px' },
+    )
+    navLinks.forEach((l) => {
+      const el = document.querySelector(l.href)
+      if (el) observer.observe(el)
+    })
+    const clearAtTop = () => {
+      if (window.scrollY < 200) setActive('')
+    }
+    window.addEventListener('scroll', clearAtTop, { passive: true })
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', clearAtTop)
+    }
   }, [])
 
   return (
@@ -53,18 +73,37 @@ export default function Navbar() {
               <motion.a
                 key={link.href}
                 href={link.href}
-                className="relative px-4 py-2 text-sm text-slate-400 hover:text-white transition-colors rounded-lg hover:bg-white/5"
+                className={`relative px-3 py-2 text-sm transition-colors rounded-lg hover:bg-white/5 ${
+                  active === link.href ? 'text-white' : 'text-slate-400 hover:text-white'
+                }`}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + i * 0.05 }}
                 whileHover={{ y: -1 }}
               >
-                {link.label}
+                {active === link.href && (
+                  <motion.span
+                    layoutId="nav-active"
+                    className="absolute inset-0 rounded-lg bg-violet-500/15 border border-violet-500/30"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative">{link.label}</span>
               </motion.a>
             ))}
           </div>
 
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => window.dispatchEvent(new Event('open-command-palette'))}
+              className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-slate-700/60 text-slate-400 hover:text-white hover:border-violet-500/50 transition-colors text-xs font-mono"
+              aria-label="Open command palette"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-3.5 h-3.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+              </svg>
+              {modKey} K
+            </button>
             <motion.a
               href="mailto:celsoleao@gmail.com"
               className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg bg-violet-600/90 hover:bg-violet-500 text-white text-sm font-medium transition-all shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]"
@@ -85,6 +124,12 @@ export default function Navbar() {
             </button>
           </div>
         </div>
+
+        {/* Reading progress */}
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-0.5 origin-left bg-gradient-to-r from-violet-500 via-cyan-400 to-rose-400"
+          style={{ scaleX: progress }}
+        />
       </motion.nav>
 
       <AnimatePresence>

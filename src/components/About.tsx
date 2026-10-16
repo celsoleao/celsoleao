@@ -59,8 +59,11 @@ export default function About() {
             </h2>
             <p className="text-slate-400 text-lg leading-relaxed">{personal.summary}</p>
             <p className="text-slate-400 leading-relaxed">
-              Last position at{' '}
-              <span className="text-white font-semibold">UKG (Ultimate Kronos Group)</span>, build
+              Currently consulting at{' '}
+              <span className="text-white font-semibold">Valley Bank</span>, building the bank's new{' '}
+              <span className="text-violet-400">Fraud Management System</span> with C#, MudBlazor, and
+              Azure SQL. Previously at{' '}
+              <span className="text-white font-semibold">UKG (Ultimate Kronos Group)</span>, I built
               HR software used by <span className="text-violet-400">Microsoft, Google, and Tesla</span>,
               while pioneering AI-assisted engineering workflows — from MCP integrations to autonomous
               agentic pipelines.

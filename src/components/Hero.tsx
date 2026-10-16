@@ -63,7 +63,7 @@ export default function Hero() {
           <motion.div variants={fadeUp}>
             <span className="inline-flex items-center gap-2 text-xs font-mono text-violet-400 border border-violet-500/30 rounded-full px-4 py-1.5 bg-violet-500/5 backdrop-blur-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Available for new opportunities
+              Building fraud detection at Valley Bank
             </span>
           </motion.div>
 
@@ -80,7 +80,7 @@ export default function Hero() {
               Senior Software Engineer
             </p>
             <p className="text-base text-slate-400 font-mono">
-              Full Stack · AI Integration Specialist
+              Full Stack · FinTech &amp; Fraud Systems · AI Integration
             </p>
           </motion.div>
 
@@ -181,10 +181,12 @@ export default function Hero() {
             { label: 'Claude AI', x: 120, y: 80 },
             { label: 'SQL Server', x: -130, y: 90 },
             { label: 'MCP', x: 0, y: -130 },
+            { label: 'Blazor', x: 175, y: 10, wide: true },
+            { label: 'Azure', x: -175, y: 25, wide: true },
           ].map((badge, i) => (
             <motion.div
               key={badge.label}
-              className="absolute px-3 py-1.5 rounded-full text-xs font-mono font-medium border border-slate-700/60 bg-[#0f0f1a]/80 text-slate-300 backdrop-blur-sm whitespace-nowrap"
+              className={`${'wide' in badge ? 'hidden sm:block ' : ''}absolute px-3 py-1.5 rounded-full text-xs font-mono font-medium border border-slate-700/60 bg-[#0f0f1a]/80 text-slate-300 backdrop-blur-sm whitespace-nowrap`}
               style={{ x: badge.x, y: badge.y }}
               initial={{ opacity: 0, scale: 0.6 }}
               animate={{ opacity: 1, scale: 1 }}
