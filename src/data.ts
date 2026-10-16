@@ -61,6 +61,22 @@ export const skills = [
 
 export const experience = [
   {
+    company: 'Valley Bank',
+    role: 'Full Stack Developer (Consultant)',
+    location: 'Remote',
+    period: 'September 2026 – Present',
+    current: true,
+    description:
+      'Building the bank’s new Fraud Management System — an alert platform that flags and routes suspicious activity for investigation.',
+    bullets: [
+      'Develop the Fraud Management System from the ground up using C# / .NET and MudBlazor.',
+      'Design the alert engine and workflows that surface suspicious transactions to fraud analysts.',
+      'Model and optimize the data layer on Azure SQL for reliable, auditable alert processing.',
+      'Build responsive, component-driven MudBlazor UIs for alert triage, review, and case management.',
+    ],
+    tech: ['C# .NET', 'Blazor', 'MudBlazor', 'Azure SQL', 'Azure', 'Fraud Detection'],
+  },
+  {
     company: 'UKG (Ultimate Kronos Group)',
     role: 'Senior Software Engineer',
     location: 'Pembroke Pines, FL, USA',
@@ -219,4 +235,15 @@ export const languages = [
   { language: 'English', level: 'Fluent', pct: 95 },
   { language: 'Portuguese', level: 'Native', pct: 100 },
   { language: 'Spanish', level: 'Intermediate', pct: 60 },
+]
+
+export const sections = [
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Featured', href: '#featured' },
+  { label: 'AI & MCP', href: '#ai' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Education', href: '#education' },
+  { label: 'Contact', href: '#contact' },
 ]
